@@ -1,0 +1,30 @@
+# Claude-to-Codex migration inventory
+
+Status: **selective Phase 0 adaptation**. `configure-cc/` remains intact as a separate ignored checkout; it is not fully migrated.
+
+| Source | Purpose | Candidate Codex destination | Status and limitation |
+| --- | --- | --- | --- |
+| `configure-cc/CLAUDE.md` | Global Claude configuration guidance | Selective guidance in root `AGENTS.md` or `docs/development-workflow.md` | General caution about preserving files is useful. Its global `~/.claude/` focus is outside LoanSim. |
+| `configure-cc/.claude/skills/audit-agents-md/` | Read-only instruction audit | Future review checklist or project skill | Candidate for adaptation; Claude-specific front matter and command injection are incompatible as-is. |
+| `configure-cc/.claude/skills/audit/` | Audit global Claude settings | None for LoanSim | Claude-specific and global. |
+| `configure-cc/.claude/skills/bootstrap/` | Write global Claude settings | None for LoanSim | Outside the authorized repository scope. |
+| `configure-cc/examples/skills/commit/` | Stage and commit | None | Direct conflict with separate owner authorization for `git add` and `git commit`. |
+| `configure-cc/examples/skills/review-pr/` | Parallel PR review, GitHub review posting, and secret gists | Possible future code-review procedure | Adapt only after code and a review target exist. Posting a review or creating a gist is an external action requiring separate owner authorization; do not copy those steps automatically. |
+| `configure-cc/examples/skills/bootstrap-project/` | Generate Claude project settings | None directly | Claude-specific paths and permissions. |
+| `configure-cc/examples/hooks/settings-with-hooks.json` | Shell-based Git and deletion checks | Possible `.codex/hooks.json` plus reviewed scripts | Not migrated. A string matcher is not a complete authorization boundary, and its command shell and event syntax need redesign and tests. |
+| `configure-cc/guides/` | Claude workflow reference | Selective ideas in project documentation | Product-specific features cannot be assumed to exist in Codex. |
+| `configure-cc/test/`, `Makefile`, `.github/workflows/check.yml` | Validate the Claude configuration project | None directly | They do not test LoanSim. End-to-end tests can access credentials; do not run them as a migration check. |
+
+## Phase 0 Codex configuration
+
+- Root `AGENTS.md` is the repository contract. Phase 0 adds nested instructions only for the created `gui` and `tests` directories.
+- The owner's later decision makes three project skills Git-visible: `financial-validation`, `financial-model-review`, and `release-check`. The new review skill is independent and read-only; validation remains a separate workflow. Metadata and actual Codex prompt discovery were checked for all three. Five imported `obra/superpowers` skills remain local and ignored. This repository cannot reproduce those five from its Git tree and does not endorse their instructions.
+- Imported-skill audit: `writing-plans` embeds `git add`/`git commit` steps and a different approval flow; `subagent-driven-development` calls for automatic task commits, independent rulings on ambiguity, and scripts that write `.superpowers/sdd` review artifacts; `requesting-code-review` expects commit SHAs; `systematic-debugging` includes a `find-polluter.sh` script that runs `npm test`; `verification-before-completion` contains useful evidence-first guidance but remains an unreviewed import. All five manifests and the four shipped shell scripts were read; none was executed. The imported content cannot override LoanSim phase, owner-decision, or Git gates. Its remaining risk is that a future agent might follow an ignored local skill unless it applies `AGENTS.md` first.
+- No project agent TOML is installed: there is no specialized Phase 0 role whose behavior requires one. Future specialists need a bounded task and explicit phase authority; their advice cannot approve decisions.
+- One project `SessionStart` hook is configured in `.codex/hooks.json`. It runs a bounded Python script that reads only the local Phase 0 status row and emits an advisory phase reminder. The handler has a three-second timeout and no network, secrets, repository writes, or Git operation. It does not authorize or enforce phase and Git rules. No command-string guard was added because matching command text cannot cover every tool path, and a callback failure can leave a tool call running. Controlled valid, invalid, oversized-input, and missing-status cases passed locally. Installed Codex `0.164.0-alpha.11.1` registered the hook; after the owner authorized trust, `/hooks` showed `SessionStart` installed 1, active 1, trusted. An ephemeral read-only Codex session reproduced the hook's exact first sentence without reading files, providing local execution evidence. The Windows command override has not run on Windows.
+
+The [official OpenAI customization documentation](https://learn.chatgpt.com/docs/customization/overview) describes project skills under `.agents/skills`, and [Build skills](https://learn.chatgpt.com/docs/build-skills) describes discovery and manifests. The [official Hooks documentation](https://learn.chatgpt.com/docs/hooks) specifies `SessionStart` input/output, the project location, trust review, and coverage limitations. [OWASP Secure Coding with AI](https://cheatsheetseries.owasp.org/cheatsheets/Secure_Coding_with_AI_Cheat_Sheet.html) supports treating imported instructions and tool output as untrusted; the [OpenSSF Secure Coding Guide for Python](https://best.openssf.org/Secure-Coding-Guide-for-Python/) informs bounded input, specific failure handling, and avoiding command injection. The installed CLI reported `codex-cli 0.164.0-alpha.11.1` during this task.
+
+## Decision gate
+
+The owner authorized Phase 0, Python 3.11+, three Git-visible project skills, the small justified hook set, and exact-file staging after verification on 2026-10-24. Phases 1–7, commit, push, and full `configure-cc/` migration remain outside this authorization. Do not remove `configure-cc/` without a separate decision.

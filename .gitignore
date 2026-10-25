@@ -1,0 +1,19 @@
+configure-cc
+/VERIFY_PROGRESS_PROMPT.md
+.agents/*
+!.agents/skills/
+.agents/skills/*
+!.agents/skills/financial-validation/
+!.agents/skills/financial-model-review/
+!.agents/skills/release-check/
+
+# Local Python environment and generated files.
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+/build/
+/dist/
