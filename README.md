@@ -1,10 +1,10 @@
 # LoanSim
 
-LoanSim is an offline desktop project for transparent mortgage simulations, comparisons, risk analysis, and exports. The Phase 0 desktop shell remains minimal. Phase 1 is adding an I/O-free calculation core for approximate monthly mortgage scenarios.
+LoanSim is an offline desktop project for transparent mortgage simulations, comparisons, risk analysis, and exports. The Phase 0 desktop shell remains minimal. Phase 1 provides an I/O-free calculation core for approximate monthly mortgage scenarios.
 
 ## Current state
 
-Phase 0 has a locally verified foundation. Phase 1 was explicitly authorized on 2026-10-25 and is complete against local criteria; Phases 2–7 remain locked. Hosted CI and the Windows hook path have not been verified in this session. Read `AGENTS.md` and `harness/status.md` before work.
+Phase 0 and Phase 1 meet their local acceptance criteria and the hosted Ubuntu, macOS, and Windows CI gate for published commit `3642027` ([run `41320491886`](https://github.com/NorbertSzala/LoanSim/actions/runs/41320491886)). Phases 2–7 remain locked. The Windows live-hook path and native-window inspection remain unverified. Read `AGENTS.md` and `harness/status.md` before work; a later delivered commit needs its own green CI run.
 
 ## Start here in a new checkout
 
