@@ -63,7 +63,7 @@ def test_oversized_status_is_rejected(tmp_path: Path) -> None:
     render_context = cast(Callable[[Path], str], namespace["render_context"])
     status_path = tmp_path / "harness" / "status.md"
     status_path.parent.mkdir()
-    status_path.write_text("x" * 16385)
+    status_path.write_text("x" * 16385, encoding="utf-8")
     with pytest.raises(ValueError, match="size limit"):
         render_context(tmp_path)
 
@@ -76,7 +76,8 @@ def test_phase_one_authorization_uses_current_status(tmp_path: Path) -> None:
     status_path.write_text(
         "| Phase 0 | Complete locally. |\n"
         "| Phase 1 | IN PROGRESS under owner authorization. |\n"
-        "| Phases 2–7 | LOCKED. |\n"
+        "| Phases 2–7 | LOCKED. |\n",
+        encoding="utf-8",
     )
 
     context = render_context(tmp_path)
@@ -94,7 +95,8 @@ def test_phase_one_completion_keeps_later_phases_locked(tmp_path: Path) -> None:
     status_path.write_text(
         "| Phase 0 | Complete locally. |\n"
         "| Phase 1 | Complete against local criteria. |\n"
-        "| Phases 2–7 | LOCKED. |\n"
+        "| Phases 2–7 | LOCKED. |\n",
+        encoding="utf-8",
     )
 
     context = render_context(tmp_path)

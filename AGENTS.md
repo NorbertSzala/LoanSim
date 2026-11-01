@@ -4,13 +4,14 @@ LoanSim is a planned offline desktop application for mortgage simulation, compar
 
 ## Current authorization
 
-The owner authorized **Phase 1 — Financial Calculation Engine** on 2026-10-25 after approving the approximate monthly model and the remaining recommendations recorded in `harness/decision-log.md`. Phase 0 was completed against locally verifiable criteria. Implement only the Phase 1 core engine, its documentation, and verification. Do not implement product GUI flows, comparison, optimization, providers, persistence, exports, or full RRSO. Phases 2–7 remain locked. `harness/status.md` records the current state; later phase descriptions are plans, not permissions.
+The owner authorized **Phase 1 — Financial Calculation Engine** on 2026-10-25 after approving the approximate monthly model and the remaining recommendations recorded in `harness/decision-log.md`. Phase 0 met locally verifiable criteria, but final closure now requires a green hosted CI run on Ubuntu, macOS, and Windows. Implement only the Phase 1 core engine, its documentation, and verification. Do not implement product GUI flows, comparison, optimization, providers, persistence, exports, or full RRSO. Phases 2–7 remain locked. `harness/status.md` records the current state; later phase descriptions are plans, not permissions.
 
 ## Mandatory workflow
 
 1. At session start, read this file, `harness/status.md`, relevant phase and domain documents, approved decisions in `harness/decision-log.md`, and read-only Git status. Identify existing local changes before editing.
 2. Before changes, present a plan and exact file list. Stay within the authorized scope. Do not delete or overwrite existing files without a stated justification and owner approval. Preserve `configure-cc/` and `docs/source-requirements.md`; do not fully migrate `configure-cc/` under the current authorization.
 3. After each coherent change, run relevant tests or validation, inspect exit codes and output, fix failures, and re-run. Never claim a check passed unless it was executed and observed. Do not weaken checks to obtain a pass.
+   Final phase closure requires a successful hosted GitHub Actions run for the exact delivered commit, with the Ubuntu, macOS, and Windows jobs all green. Local checks, a configured matrix, or a partially skipped run do not satisfy this gate.
 4. For a substantive product, mathematical, financial, architectural, security, or compatibility uncertainty, explain viable alternatives and consequences, recommend one only when justified, and ask the owner for a decision. Continue independent authorized work; do not treat a proposal or silence as approval.
 5. Keep owner-approved decisions, source requirements, proposals, and open questions distinct. Record approvals in `harness/decision-log.md`; record actual work and checks in `harness/build-log.md`.
 6. At completion, inspect the final files and Git status, report changes, actual verification results, limitations, and open decisions in Polish, then stop.

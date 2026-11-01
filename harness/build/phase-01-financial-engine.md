@@ -1,6 +1,6 @@
 # Phase 1 — Financial calculation engine
 
-Status: **COMPLETE AGAINST LOCALLY VERIFIABLE §30 CRITERIA** under the owner's explicit 2026-10-25 authorization and recurring-charge decision. Evidence: `harness/context/phase-01-financial-engine.md`. Sources: `docs/source-requirements.md` §§8–10, 23, 30; `harness/decision-log.md`; `docs/requirements-traceability.md` FIN-001–009; `docs/financial-assumptions.md`; `docs/mathematical-model.md`. Phases 2–7 remain locked.
+Status: **CORE COMPLETE AGAINST LOCALLY VERIFIABLE §30 CRITERIA; FINAL CLOSURE PENDING THREE-SYSTEM CI** under the owner's explicit 2026-10-25 authorization, recurring-charge decision, and 2026-11-01 CI gate. Evidence: `harness/context/phase-01-financial-engine.md` and the later audit in `harness/build-log.md`. Sources: `docs/source-requirements.md` §§8–10, 23, 30; `harness/decision-log.md`; `docs/requirements-traceability.md` FIN-001–009; `docs/financial-assumptions.md`; `docs/mathematical-model.md`. Phases 2–7 remain locked.
 
 ## Objective, scope, and non-goals
 
@@ -16,7 +16,7 @@ Expected future `src/loansim/core/` modules for models, interest, amortization, 
 
 ## Acceptance, risks, and owner questions
 
-Acceptance requires reproducible model-period schedules with display dates, all assigned Phase 1 FIN-007/008 outputs, auditable per-row records, independently checked numbers, and passing applicable quality checks. The fuller RRSO and Phase 4 risk cases in the source are not Phase 1 completion criteria under the owner's newer scope decision. Main risks are plausible but incorrect amounts, misleading comparison labels, and mislabeling a rate conversion as RRSO. The owner approved the seven detailed choices and the own-funds-only recurring-charge rule recorded in `docs/financial-assumptions.md`.
+Acceptance requires reproducible model-period schedules with display dates, all assigned Phase 1 FIN-007/008 outputs, auditable per-row records, independently checked numbers, and passing applicable quality checks. Final closure also requires a green hosted GitHub Actions run for the exact delivered commit on Ubuntu, macOS, and Windows; the published `09b5e79` run failed on all three. The fuller RRSO and Phase 4 risk cases in the source are not Phase 1 completion criteria under the owner's newer scope decision. Main risks are plausible but incorrect amounts, misleading comparison labels, and mislabeling a rate conversion as RRSO. The owner approved the seven detailed choices and the own-funds-only recurring-charge rule recorded in `docs/financial-assumptions.md`.
 
 ## Test-first execution plan
 
