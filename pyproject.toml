@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "loansim"
 version = "0.1.0"
-description = "Offline mortgage analysis desktop application (foundation shell)"
+description = "Offline mortgage scenario simulator with a deterministic calculation core"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = ["PySide6-Essentials>=6.8,<7"]
@@ -15,6 +15,7 @@ loansim = "loansim.__main__:main"
 
 [dependency-groups]
 dev = [
+  "hypothesis>=6,<7",
   "mypy>=1.15,<2",
   "pytest>=8,<10",
   "ruff>=0.11,<1",

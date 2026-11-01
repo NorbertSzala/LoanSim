@@ -4,7 +4,7 @@ LoanSim is a planned offline desktop application for mortgage simulation, compar
 
 ## Current authorization
 
-The owner authorized **Phase 0 — Repository Foundation and Codex Configuration** on 2026-10-24, including a minimal Python package and PySide6 startup window, infrastructure tests, quality checks, CI, and justified project skills. Do not implement the financial engine, product GUI flows, comparison, optimization, providers, persistence, or exports. Phases 1–7 remain locked. Completion of Phase 0 does not authorize Phase 1. `harness/status.md` records the current state; later phase descriptions are plans, not permissions.
+The owner authorized **Phase 1 — Financial Calculation Engine** on 2026-10-25 after approving the approximate monthly model and the remaining recommendations recorded in `harness/decision-log.md`. Phase 0 was completed against locally verifiable criteria. Implement only the Phase 1 core engine, its documentation, and verification. Do not implement product GUI flows, comparison, optimization, providers, persistence, exports, or full RRSO. Phases 2–7 remain locked. `harness/status.md` records the current state; later phase descriptions are plans, not permissions.
 
 ## Mandatory workflow
 

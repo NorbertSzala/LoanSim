@@ -1,6 +1,6 @@
 # Development and requirements workflow
 
-The root `AGENTS.md` is the enforceable repository instruction file. `harness/status.md` records the active authorization. `PLANS.md` is a roadmap, not permission to implement. The owner's later 2026-10-24 decision authorizes the full Phase 0 foundation; Phases 1–7 remain locked.
+The root `AGENTS.md` is the enforceable repository instruction file. `harness/status.md` records the active authorization. `PLANS.md` is a roadmap, not permission to implement. Phase 0 and Phase 1 are complete against their locally verifiable criteria after explicit owner authorizations; Phases 2–7 remain locked.
 
 ## Start a session
 
@@ -17,7 +17,7 @@ For an independent audit of a previous phase or agent delivery, read the owner-p
 
 ## Make and verify changes
 
-Present a plan and file list before editing. Make coherent, reviewable changes. Run targeted checks after each change group; investigate failures and re-run. Before reporting completion, run all applicable checks, inspect outputs, verify preservation of owner files, inspect read-only Git status, and record exact results in `harness/build-log.md`. Phase 0 application startup and GUI smoke tests are applicable; financial and export tests remain for later authorized phases.
+Present a plan and file list before editing. Make coherent, reviewable changes. Run targeted checks after each change group; investigate failures and re-run. Before reporting completion, run all applicable checks, inspect outputs, verify preservation of owner files, inspect read-only Git status, and record exact results in `harness/build-log.md`. Phase 0 startup checks and Phase 1 financial tests are applicable to the current repository; export tests require a later authorized phase.
 
 ## Finish a phase
 

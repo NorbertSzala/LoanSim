@@ -1,10 +1,10 @@
 # Planned architecture
 
-This map derives from `source-requirements.md` sections 21–26. Phase 0 implements only the package entry point and a presentation-only GUI startup shell. Other boundaries remain planned interfaces, not implemented modules.
+This map derives from `source-requirements.md` sections 21–26. Phase 0 implemented the package entry point and a presentation-only GUI startup shell. Phase 1 is authorized to add a deterministic, I/O-free `core` package under the owner's approximate monthly model. Other boundaries remain planned interfaces, not implemented modules.
 
 | Planned boundary | Responsibility | Must not own |
 | --- | --- | --- |
-| `core` | Typed financial inputs and deterministic repayment, interest, overpayment, cost, and APR-related calculations. | GUI, database, provider I/O, or invented conventions. |
+| `core` | Typed financial inputs and deterministic repayment, interest, overpayment, cost, and simplified effective-rate calculations under explicit conventions. | GUI, database, provider I/O, full RRSO, or invented conventions. |
 | `analysis` | Scenario comparison, transparent risk metrics, sensitivity, break-even, and constrained optimization. | Hidden financial formulas or opaque recommendations. |
 | `data` | SQLite persistence, schema versions, simulation history, and reproducible snapshots. | Financial business rules. |
 | `providers` | Verified external or imported rate series with source, dates, units, and missing-data policies. | GUI state or fabricated observations. |
@@ -13,6 +13,6 @@ This map derives from `source-requirements.md` sections 21–26. Phase 0 impleme
 
 The intended dependency direction is `gui`, `reporting`, and `analysis` consuming validated `core` results; `data` and `providers` provide explicit I/O boundaries. The exact package interfaces and dependency library choices are future architectural decisions. The preferred stack in the source is a proposal, not permission to install every library.
 
-Create nested `AGENTS.md` files when their directories are introduced in an authorized programming phase. Phase 0 introduces `gui` and `tests` instructions. The root policy applies to every module; nested guidance adds only domain-specific tests and invariants.
+Create nested `AGENTS.md` files when their directories are introduced in an authorized programming phase. Phase 0 introduced `gui` and `tests` instructions; Phase 1 introduces `core` guidance. The root policy applies to every module; nested guidance adds only domain-specific tests and invariants.
 
-Open issues include input model boundaries, reproducible calculation versioning, GUI/background work strategy, and provider licensing. Record trade-offs and ask the owner before choices with material consequences.
+Open issues outside the Phase 1 core include GUI/background work strategy and provider licensing. The Phase 1 model should expose a calculation-convention identifier so later persistence can reproduce results. Record trade-offs and ask the owner before choices with material consequences.
