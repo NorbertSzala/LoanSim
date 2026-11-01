@@ -1,4 +1,4 @@
-name: Phase 0 checks
+name: LoanSim checks
 
 on:
   push:
@@ -24,6 +24,11 @@ jobs:
         with:
           version: "0.13.5"
           python-version: "3.11"
+      - name: Install Ubuntu Qt runtime dependency
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libegl1
       - name: Install locked project and development dependencies
         run: uv sync --locked --dev
       - name: Import package

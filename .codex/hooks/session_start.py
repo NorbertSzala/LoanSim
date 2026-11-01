@@ -30,11 +30,23 @@ def render_context(root: Path) -> str:
         summary = "reported incomplete"
     else:
         summary = "requires review"
+    phase_one_rows = [line for line in status.splitlines() if line.startswith("| Phase 1 |")]
+    if len(phase_one_rows) > 1:
+        raise ValueError("expected at most one Phase 1 status row")
+    phase_reminder = "Phases 1–7 remain locked without explicit owner authorization."
+    if phase_one_rows:
+        phase_one_state = phase_one_rows[0].split("|")[2].strip().lower()
+        if phase_one_state.startswith("in progress"):
+            phase_reminder = "Phase 1 is authorized and in progress. Phases 2–7 remain locked."
+        elif phase_one_state.startswith("complete"):
+            phase_reminder = (
+                "Phase 1 status is reported complete; verify evidence. Phases 2–7 remain locked."
+            )
     return (
         "LoanSim phase reminder (advisory): read AGENTS.md, harness/status.md, "
         "and harness/decision-log.md before work. "
         f"Phase 0 status is {summary}; verify evidence before claiming completion. "
-        "Phases 1–7 remain locked without explicit owner authorization. "
+        f"{phase_reminder} "
         "This hook does not grant or enforce Git permissions."
     )
 
