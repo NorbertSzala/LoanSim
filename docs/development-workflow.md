@@ -1,6 +1,6 @@
 # Development and requirements workflow
 
-The root `AGENTS.md` is the enforceable repository instruction file. `harness/status.md` records the active authorization. `PLANS.md` is a roadmap, not permission to implement. Phase 0 and Phase 1 met their local and hosted CI criteria for published commit `3642027`; the owner authorized Phase 2 on 2026-11-01. Phases 3–7 remain locked. Phase 2 final closure requires a green hosted three-system CI run for its exact delivered commit.
+The root `AGENTS.md` is the enforceable repository instruction file. `harness/status.md` records the active authorization. `PLANS.md` is a roadmap, not permission to implement. Phase 0 and Phase 1 met their local and hosted CI criteria for published commit `3642027`; Phase 2 met its local and hosted three-system CI criteria for published commit `07391f3` ([run `42482359059`](https://github.com/NorbertSzala/LoanSim/actions/runs/42482359059)). Phases 3–7 remain locked. Any later delivered commit must meet the hosted CI gate for its exact SHA before final closure is claimed for that commit.
 
 ## Start a session
 

@@ -1,6 +1,6 @@
-# Phase 2 desktop interface and persistence — local evidence
+# Phase 2 desktop interface and persistence — delivery evidence
 
-Updated: 2026-11-01. The owner authorized Phase 2 and selected choices `1A, 2A, 3A` in `harness/decision-log.md`. Phases 3–7 remain locked.
+Updated: 2026-11-08. The owner authorized Phase 2 and selected choices `1A, 2A, 3A` in `harness/decision-log.md`. Published commit `07391f375b56214233ac360a4a30b440f3fef4d0` met the local criteria and hosted three-system CI gate. Phases 3–7 remain locked.
 
 ## Implemented boundary
 
@@ -26,7 +26,7 @@ The following table records the original Phase 2 implementation checks before th
 
 ## Limits and handoff
 
-The phase covers one scenario at a time. Comparison, optimization, external providers, exports, and full RRSO remain outside scope. A hosted GitHub Actions run for the exact delivered commit on Ubuntu, macOS, and Windows is still required for final Phase 2 closure. The owner has not authorized staging, committing, or pushing, so that hosted gate is not claimed. Native-window and Windows live-hook inspection remain unverified. The trusted SessionStart hook still emits a Phase 2 lock reminder and needs separate review and approval before its text changes.
+The phase covers one scenario at a time. Comparison, optimization, external providers, exports, and full RRSO remain outside scope. At the initial 2026-11-01 handoff, the hosted CI gate was still pending and no Git staging, commit, or push had been performed by the agent. Native-window and Windows live-hook inspection remain unverified. The trusted SessionStart hook still emits a Phase 2 lock reminder and needs separate review and approval before its text changes.
 
 ## Independent audit repairs
 
@@ -45,3 +45,9 @@ Three new offscreen workflow regressions first failed for exactly those behavior
 A separate read-only code review identified further restoration and metadata cases. Failing tests first showed loss of an existing validation error, a restored entered field remaining read-only, forced recalculation after name/color/notes edits, a stale open failure appearing on the newer scenario, and a space-padded color reaching the chart despite failing its format. A historical derived-value fixture also showed that metadata edits replaced stored old-engine provenance and the visible derived value. The form now retains validation and editability on failed restoration, and restored entered fields are editable. Metadata-only changes update the original-input metadata while preserving the result, engine version, and derived provenance; the old displayed derivation is restored. Stale open failures are ignored, and color validation uses the exact database/chart format. The expanded workflow suite passed 15 tests. After documentation updates, the full offscreen suite reported **129 passed in 9.44 s**, exit 0; Ruff lint and format, mypy over 34 files, the offline lock check, package build, and preservation checks all exited 0. These are local macOS checks, not hosted three-system CI.
 
 A fresh external Python 3.11.17 environment then installed the locked project and development dependencies offline (16 packages, exit 0). Package/data/GUI imports succeeded, the full offscreen suite again reported **129 passed in 11.16 s**, and Ruff lint, Ruff format, mypy, and source/wheel build all exited 0. The last read-only Git inspection showed no staged changes and preserved the source, core, hook, and `configure-cc/` boundaries.
+
+## 2026-11-08 published Phase 2 CI gate
+
+The published Phase 2 commit is `07391f375b56214233ac360a4a30b440f3fef4d0`. Local `master`, `origin/master`, and remote `master` matched that SHA before the documentation refresh, and the worktree was clean. GitHub Actions [run `42482359059`](https://github.com/NorbertSzala/LoanSim/actions/runs/42482359059) was a completed successful `push` run for that exact SHA. Its `ubuntu-latest`, `macos-latest`, and `windows-latest` jobs all completed successfully. Every required job step passed: locked installation, package import, pytest, Ruff lint and format, mypy, and package build. The Ubuntu Qt runtime installation passed on Ubuntu and was conditionally skipped on macOS and Windows. Job logs reported **129 passed** on each system (Ubuntu 8.11 s, macOS 13.51 s, Windows 14.12 s). This meets the final hosted CI gate for the published Phase 2 commit.
+
+Native-window inspection and Windows live-hook execution remain unverified; the hosted offscreen jobs do not establish either claim. The trusted hook still has a stale Phase 2 lock reminder. This documentation refresh is local and unstaged; any later delivered commit needs its own green hosted run for the exact new SHA.

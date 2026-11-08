@@ -4,14 +4,14 @@ LoanSim is an offline desktop project for transparent mortgage simulations, comp
 
 ## Current state
 
-Phase 0 and Phase 1 met their local acceptance criteria and the hosted Ubuntu, macOS, and Windows CI gate for published commit `3642027` ([run `41320491886`](https://github.com/NorbertSzala/LoanSim/actions/runs/41320491886)). Phase 2 was authorized on 2026-11-01. Its local GUI and SQLite checks were repeated after the independent audit repairs; the hosted CI gate for the delivered Phase 2 commit remains pending. Phases 3–7 remain locked. The currently trusted SessionStart hook has a stale Phase 2 lock reminder; `AGENTS.md` and `harness/status.md` record current authorization. Native-window and Windows live-hook inspection remain unverified.
+Phase 0 and Phase 1 met their local acceptance criteria and the hosted Ubuntu, macOS, and Windows CI gate for published commit `3642027` ([run `41320491886`](https://github.com/NorbertSzala/LoanSim/actions/runs/41320491886)). Phase 2 met its local GUI and SQLite criteria after independent audit repairs and its hosted three-system CI gate for published commit `07391f3` ([run `42482359059`](https://github.com/NorbertSzala/LoanSim/actions/runs/42482359059)). Phases 3–7 remain locked. The currently trusted SessionStart hook has a stale Phase 2 lock reminder; `AGENTS.md` and `harness/status.md` record current authorization. Native-window and Windows live-hook inspection remain unverified.
 
 ## Start here in a new checkout
 
 1. Read `AGENTS.md`, `harness/status.md`, and `harness/decision-log.md` to identify the current authorization and unresolved decisions.
 2. Read `docs/source-requirements.md` for the original requirements, then `PLANS.md` and the relevant `harness/build/phase-*.md` for the requested phase. Planned later phases grant no implementation permission.
 3. Inspect `git status --short` before editing; the status document is a handoff, while Git shows the current local changes.
-4. For verification, use the commands below and compare the results with `harness/context/phase-00-foundation.md` and the Phase 1 context when available. Report checks you actually ran and any platform limits.
+4. For verification, use the commands below and compare the results with the relevant notes in `harness/context/`. Report checks you actually ran and any platform limits.
 
 Repository instructions, plans, decisions, reviewed project skills, and the shared hook belong in Git. `VERIFY_PROGRESS_PROMPT.md`, imported third-party skills, environments, caches, and secrets remain local or ignored. A fresh checkout may not contain the optional audit prompt.
 

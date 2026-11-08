@@ -14,4 +14,4 @@ Changing only the name, exact `#RRGGBB` color, or notes preserves the saved calc
 
 ## Owner-approved choices
 
-On 2026-11-01 the owner selected `1A` for the Polish form and input locks, `2A` for complete versioned snapshots and explicit deletion, and `3A` for a Qt-only balance chart, numeric table, and background calculation/storage. Presentation strings are centralized to permit a later English catalog. The final hosted three-system CI gate still applies to the delivered commit.
+On 2026-11-01 the owner selected `1A` for the Polish form and input locks, `2A` for complete versioned snapshots and explicit deletion, and `3A` for a Qt-only balance chart, numeric table, and background calculation/storage. Presentation strings are centralized to permit a later English catalog. The hosted three-system CI gate passed for published commit `07391f3` ([run `42482359059`](https://github.com/NorbertSzala/LoanSim/actions/runs/42482359059)).

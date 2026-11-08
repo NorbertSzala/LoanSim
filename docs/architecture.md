@@ -1,6 +1,6 @@
 # Planned architecture
 
-This map derives from `source-requirements.md` sections 21–26. Phase 0 implemented the package entry point, Phase 1 added a deterministic I/O-free `core`, and Phase 2 is authorized to add the single-scenario `gui` and local SQLite `data` boundaries. Analysis, providers, and reporting remain planned interfaces.
+This map derives from `source-requirements.md` sections 21–26. Phase 0 implemented the package entry point, Phase 1 added a deterministic I/O-free `core`, and Phase 2 added the single-scenario `gui` and local SQLite `data` boundaries. Analysis, providers, and reporting remain planned interfaces.
 
 | Planned boundary | Responsibility | Must not own |
 | --- | --- | --- |
