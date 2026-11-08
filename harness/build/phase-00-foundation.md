@@ -2,7 +2,7 @@
 
 ## Status and boundary
 
-The owner explicitly authorized the full Phase 0 foundation under `docs/source-requirements.md` §29 on 2026-10-24, superseding the earlier documentation-only boundary. The later 2026-10-24 message also authorized the third project skill, a small justified hook set, and exact-file Git staging after verification. Phase 0 was initially published as commit `69c4dd4`; the later published commit `3642027` includes the CI repairs and passed the three-system hosted gate. Phase 1 was separately authorized. Phases 2–7 remain locked. This file is the execution and acceptance plan for Phase 0, not authority for a later phase.
+The owner explicitly authorized the full Phase 0 foundation under `docs/source-requirements.md` §29 on 2026-10-24, superseding the earlier documentation-only boundary. The later 2026-10-24 message also authorized the third project skill, a small justified hook set, and exact-file Git staging after verification. Phase 0 was initially published as commit `69c4dd4`; the later published commit `3642027` includes the CI repairs and passed the three-system hosted gate. Phase 1 and then Phase 2 were separately authorized. Phases 3–7 remain locked. This file is the execution and acceptance plan for Phase 0, not authority for a later phase.
 
 ## Completed earlier documentation subset
 

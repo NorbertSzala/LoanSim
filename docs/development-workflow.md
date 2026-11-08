@@ -1,6 +1,6 @@
 # Development and requirements workflow
 
-The root `AGENTS.md` is the enforceable repository instruction file. `harness/status.md` records the active authorization. `PLANS.md` is a roadmap, not permission to implement. Phase 0 and Phase 1 are complete against their locally verifiable criteria after explicit owner authorizations; Phases 2–7 remain locked.
+The root `AGENTS.md` is the enforceable repository instruction file. `harness/status.md` records the active authorization. `PLANS.md` is a roadmap, not permission to implement. Phase 0 and Phase 1 met their local and hosted CI criteria for published commit `3642027`; the owner authorized Phase 2 on 2026-11-01. Phases 3–7 remain locked. Phase 2 final closure requires a green hosted three-system CI run for its exact delivered commit.
 
 ## Start a session
 

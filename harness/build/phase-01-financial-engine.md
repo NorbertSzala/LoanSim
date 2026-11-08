@@ -1,6 +1,6 @@
 # Phase 1 — Financial calculation engine
 
-Status: **CORE COMPLETE AGAINST LOCALLY VERIFIABLE §30 CRITERIA; THREE-SYSTEM HOSTED CI GATE MET FOR PUBLISHED COMMIT `3642027`** under the owner's explicit 2026-10-25 authorization, recurring-charge decision, and 2026-11-01 CI gate. Evidence: `harness/context/phase-01-financial-engine.md`, hosted run `41320491886`, and the later audit in `harness/build-log.md`. Sources: `docs/source-requirements.md` §§8–10, 23, 30; `harness/decision-log.md`; `docs/requirements-traceability.md` FIN-001–009; `docs/financial-assumptions.md`; `docs/mathematical-model.md`. Phases 2–7 remain locked.
+Status: **CORE COMPLETE AGAINST LOCALLY VERIFIABLE §30 CRITERIA; THREE-SYSTEM HOSTED CI GATE MET FOR PUBLISHED COMMIT `3642027`** under the owner's explicit 2026-10-25 authorization, recurring-charge decision, and 2026-11-01 CI gate. Evidence: `harness/context/phase-01-financial-engine.md`, hosted run `41320491886`, and the later audit in `harness/build-log.md`. Sources: `docs/source-requirements.md` §§8–10, 23, 30; `harness/decision-log.md`; `docs/requirements-traceability.md` FIN-001–009; `docs/financial-assumptions.md`; `docs/mathematical-model.md`. Phase 2 was separately authorized on 2026-11-01; Phases 3–7 remain locked.
 
 ## Objective, scope, and non-goals
 

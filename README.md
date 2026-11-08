@@ -1,10 +1,10 @@
 # LoanSim
 
-LoanSim is an offline desktop project for transparent mortgage simulations, comparisons, risk analysis, and exports. The Phase 0 desktop shell remains minimal. Phase 1 provides an I/O-free calculation core for approximate monthly mortgage scenarios.
+LoanSim is an offline desktop project for transparent mortgage simulations, comparisons, risk analysis, and exports. Phase 1 provides an I/O-free approximate monthly mortgage engine. Phase 2 adds a single-scenario PySide6 form, results, a balance chart, and local SQLite history.
 
 ## Current state
 
-Phase 0 and Phase 1 meet their local acceptance criteria and the hosted Ubuntu, macOS, and Windows CI gate for published commit `3642027` ([run `41320491886`](https://github.com/NorbertSzala/LoanSim/actions/runs/41320491886)). Phases 2–7 remain locked. The Windows live-hook path and native-window inspection remain unverified. Read `AGENTS.md` and `harness/status.md` before work; a later delivered commit needs its own green CI run.
+Phase 0 and Phase 1 met their local acceptance criteria and the hosted Ubuntu, macOS, and Windows CI gate for published commit `3642027` ([run `41320491886`](https://github.com/NorbertSzala/LoanSim/actions/runs/41320491886)). Phase 2 was authorized on 2026-11-01. Its local GUI and SQLite checks were repeated after the independent audit repairs; the hosted CI gate for the delivered Phase 2 commit remains pending. Phases 3–7 remain locked. The currently trusted SessionStart hook has a stale Phase 2 lock reminder; `AGENTS.md` and `harness/status.md` record current authorization. Native-window and Windows live-hook inspection remain unverified.
 
 ## Start here in a new checkout
 
@@ -26,11 +26,11 @@ Repository instructions, plans, decisions, reviewed project skills, and the shar
 - `docs/repository-audit.md` and `docs/codex-migration.md`: baseline inventory and Claude-to-Codex assessment.
 - `harness/status.md`, `harness/decision-log.md`, and `harness/build-log.md`: current permission, owner decisions, and observed work.
 
-The source specification also describes future SQLite history, analysis, reporting, providers, and a product GUI. None is part of the Phase 1 calculation core. Installation and verification evidence is recorded in the phase plans and `harness/build-log.md`.
+The source specification also describes future analysis, reporting, and providers. These remain outside the Phase 2 single-scenario interface and the Phase 1 calculation core. Installation and verification evidence is recorded in the phase plans and `harness/build-log.md`.
 
 ## Install and verify
 
-Use Python 3.11 or newer and [uv](https://docs.astral.sh/uv/). Install the locked package and development tools with `uv sync --locked --python 3.11`. Run `uv run --locked pytest -q`, `uv run --locked ruff check .codex/hooks src tests`, `uv run --locked ruff format --check .codex/hooks src tests`, and `uv run --locked mypy .codex/hooks src/loansim tests`. Launch the minimal window with `uv run --locked python -m loansim` (or `uv run --locked loansim`); it contains no product loan-calculator workflow.
+Use Python 3.11 or newer and [uv](https://docs.astral.sh/uv/). Install the locked package and development tools with `uv sync --locked --python 3.11`. Run `uv run --locked pytest -q`, `uv run --locked ruff check .codex/hooks src tests`, `uv run --locked ruff format --check .codex/hooks src tests`, and `uv run --locked mypy .codex/hooks src/loansim tests`. Launch the single-scenario window with `uv run --locked python -m loansim` (or `uv run --locked loansim`). Its SQLite history is stored under the platform application-data directory; set `LOANSIM_DATA_DIR` to use a chosen local directory. All Phase 2 interactions work offline.
 
 ## Phase 1 calculation example
 

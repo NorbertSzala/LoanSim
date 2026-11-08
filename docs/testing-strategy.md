@@ -1,13 +1,13 @@
 # Verification strategy
 
-This document describes Phase 0 checks and future product checks. Actual outcomes are recorded only in `harness/build-log.md`.
+This document describes repository checks and the current GUI and SQLite verification scope. Actual outcomes are recorded only in `harness/build-log.md` and the corresponding phase context note.
 
 | Change type | Required evidence when implemented |
 | --- | --- |
 | Documentation and work rules | Markdown structure, local links, consistency of phase/status/decisions, preservation of source, read-only Git status, whitespace checks. |
 | Financial engine | Independent reference formulas and schedules, golden cases, numerical invariants, property-based tests, edge cases, and regression tests for every material formula change. |
-| GUI | Automated interactions, validation/error cases, offscreen startup smoke test, and visual inspection where available. |
-| Persistence | Round-trip, versioned migration, integrity, deletion, and old-data preservation tests. |
+| GUI | Automated interactions, entered/derived/locked state, validation/error cases, exact color format, rate-path provenance, offscreen startup smoke test, responsive calculation, unsaved-data confirmation, overlapping open requests and stale failures, failed restoration preserving field editability and validation, and visual inspection where available. |
+| Persistence | Full input/result round-trip, UTC-aware timestamps, versioned migration, snapshot integrity, atomic write/migration failure, deletion, old-data preservation, engine-version preservation on resave, and metadata-only edits retaining result and derived provenance. |
 | Providers | Mocked integration, offline behavior, missing data, source/date/unit provenance, and licensing review. |
 | Analysis | Objective and constraint checks, infeasible and tied cases, sensitivity, Pareto correctness, and chart-to-engine reconciliation. |
 | PDF/XLSX | Open/parse generated files, verify totals, units, sheets/pages, Unicode, assumptions, and source disclosure. |

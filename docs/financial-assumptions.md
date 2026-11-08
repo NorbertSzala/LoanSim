@@ -1,6 +1,6 @@
 # Financial assumptions register
 
-Source: `source-requirements.md` §§8–10 and 23, followed by the owner's explicit Phase 1 modeling decisions and implementation authorization on 2026-10-25. These decisions specify an approximate, general mortgage simulator, not a bank-exact contract model. Phase 1 is authorized; Phases 2–7 remain locked.
+Source: `source-requirements.md` §§8–10 and 23, followed by the owner's explicit Phase 1 modeling decisions and implementation authorization on 2026-10-25. These decisions specify an approximate, general mortgage simulator, not a bank-exact contract model. Phase 2 may present the unchanged Phase 1 engine; Phases 3–7 remain locked.
 
 ## Owner-approved Phase 1 conventions
 

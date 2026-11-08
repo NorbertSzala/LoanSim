@@ -196,3 +196,82 @@ The owner requested a correction to `docs/codex-migration.md`: the SessionStart 
 At the start of this owner-requested status update, local `master`, `origin/master`, and remote `master` were `3642027b0bd5e41f47024e28bc498038615cbf7b`, and the tracked working tree was clean. GitHub Actions [run `41320491886`](https://github.com/NorbertSzala/LoanSim/actions/runs/41320491886) for that exact SHA completed successfully. Its Ubuntu, macOS, and Windows jobs each passed locked installation, package import, 81 pytest tests, Ruff lint and format, mypy, and package build. Ubuntu also installed `libegl1` successfully; that Linux-only step was correctly skipped on macOS and Windows. Job summaries and logs were inspected directly. This meets the owner-added hosted CI gate for the published commit, not for any future documentation commit.
 
 The status reconciliation updated `harness/status.md`, `PLANS.md`, `docs/requirements-traceability.md`, both Phase 0/1 build plans, and `README.md`. No application code, test, workflow, source requirement, or `configure-cc/` file changed. An initial direct hook-context assertion exited 1 because the new Phase 0/1 status rows did not begin with `Complete`; the row prefixes were corrected without changing the hook. The repeated direct hook-context assertion exited 0 and printed both reported-complete reminders while keeping Phases 2–7 locked. `QT_QPA_PLATFORM=offscreen PYTHONDONTWRITEBYTECODE=1 PYTEST_ADDOPTS='-p no:cacheprovider' HYPOTHESIS_STORAGE_DIRECTORY=/private/tmp/loansim-status-refresh-hypothesis-20261101 /private/tmp/loansim-audit-venv-20261101/bin/pytest -q tests/test_session_start_hook.py` exited 0 with 9 passed. `QT_QPA_PLATFORM=offscreen PYTHONDONTWRITEBYTECODE=1 PYTEST_ADDOPTS='-p no:cacheprovider' HYPOTHESIS_STORAGE_DIRECTORY=/private/tmp/loansim-status-refresh-full-hypothesis-20261101 /private/tmp/loansim-audit-venv-20261101/bin/pytest -q` exited 0 with 81 passed. A status/roadmap/traceability consistency assertion exited 0 (`PHASE_STATUS_AND_HOOK_SIZE_OK 3064`); `git diff --check` exited 0. Source-requirements and approved hook SHA-256 values remained `513377bf04f68e4447868944fe1a6b14856e677138c379511d9595340af9f89e` and `7546a316ff33977b78fde6765954f0f685d64ce123c69c67e6556d4fc18340d7`; `configure-cc/` remained clean. This documentation change is unstaged and unpublished. If delivered as a new commit, that new SHA needs its own green hosted three-system run before final closure is claimed for it.
+
+## 2026-11-01 — Phase 2 desktop interface and persistence
+
+The owner authorized Phase 2 and selected `1A, 2A, 3A`: a Polish single-scenario form with locks and inline validation; versioned SQLite snapshots with explicit deletion; and a Qt-only principal-balance chart with a numeric table. The GUI now supports derived loan terms, rate paths, charges, overpayments, results and schedules, and saving, reopening, copying, or deleting a scenario. Calculations and SQLite tasks run through the Qt thread pool. The new `data` package stores typed inputs, provenance, and result snapshots, uses transactional schema migration and writes, and checks snapshot integrity. Documentation records the approved boundary and keeps Phases 3–7 locked. The separately reviewed SessionStart hook was left unchanged; its Phase 2 lock reminder is stale and advisory.
+
+Observed local checks, all exit 0:
+
+| Command | Result |
+| --- | --- |
+| `QT_QPA_PLATFORM=offscreen PYTHONDONTWRITEBYTECODE=1 PYTEST_ADDOPTS='-p no:cacheprovider' HYPOTHESIS_STORAGE_DIRECTORY=/private/tmp/loansim-phase2-hypothesis-final-final /private/tmp/loansim-audit-venv-20261101/bin/pytest -q` | 110 passed in 2.82 s. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/ruff check .codex/hooks src tests` | All checks passed. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/ruff format --check .codex/hooks src tests` | 38 files already formatted. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/mypy .codex/hooks src/loansim tests` | No issues in 34 source files. |
+| `uv lock --check --offline --python /private/tmp/loansim-review-python/cpython-3.11.17-macos-aarch64-none/bin/python3.11` | Resolved 17 packages; the ignored `.venv` link points to a stale interpreter. |
+| `uv build --offline --python /private/tmp/loansim-review-python/cpython-3.11.17-macos-aarch64-none/bin/python3.11 --out-dir /private/tmp/loansim-phase2-dist-releasecheck` | Built wheel and source archive; wheel inventory check confirmed 28 entries and the codec, repository, form, and chart modules. |
+| `git diff --check` | Exit 0. |
+
+Offscreen form and results views were visually inspected. `docs/source-requirements.md` remains at SHA-256 `513377bf04f68e4447868944fe1a6b14856e677138c379511d9595340af9f89e`; `.codex/hooks/session_start.py` remains at its approved SHA-256 `7546a316ff33977b78fde6765954f0f685d64ce123c69c67e6556d4fc18340d7`; `configure-cc/` is clean. Changes remain unstaged. No commit or push occurred, so hosted Ubuntu/macOS/Windows CI for the exact Phase 2 delivery is pending. Native-window inspection and Windows hook execution are unverified.
+
+## 2026-11-01 — Phase 2 independent-audit repairs
+
+The owner asked to implement all necessary Phase 2 audit corrections. Before editing, the working tree already contained the local Phase 2 implementation and documentation; `master` and `origin/master` both pointed to `eec316ade519f2aebfa58f1db721811019392838`. No tracked changes were staged. The earlier status claim that both refs still pointed to `3642027` was stale. The repair stayed in the authorized single-scenario GUI and SQLite scope and did not change financial formulas or the trusted hook.
+
+Regression tests were added before each repair. The new repository test failed because a copied older result received the current engine version. GUI tests failed for stale derived values, invalid dates and period bounds, a payment cap below the mandatory installment, double save, saved-derivation display, and missing result columns. After implementation, focused repository tests reported 9 passed; form tests 14 passed; chart tests 6 passed; workflow tests 5 passed; startup tests 2 passed. A first broader GUI run exposed a startup hang caused by blocking close while an initial history task was pending; the close handler now retries after background tasks finish, and the startup tests passed on rerun. Ruff identified long lines and formatting after the presentation catalog edit; those were fixed and rerun.
+
+Observed checks before this documentation update:
+
+| Command | Result |
+| --- | --- |
+| `QT_QPA_PLATFORM=offscreen PYTHONDONTWRITEBYTECODE=1 PYTEST_ADDOPTS='-p no:cacheprovider' HYPOTHESIS_STORAGE_DIRECTORY=/private/tmp/loansim-phase2-fixes-hypothesis /private/tmp/loansim-audit-venv-20261101/bin/pytest -q` | 119 passed in 4.54 s, exit 0. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/ruff check .codex/hooks src tests` | All checks passed, exit 0. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/ruff format --check .codex/hooks src tests` | 38 files already formatted, exit 0. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/mypy .codex/hooks src/loansim tests` | No issues in 34 source files, exit 0. |
+| `UV_CACHE_DIR=/private/tmp/loansim-review-cache uv lock --check --offline --python /private/tmp/loansim-review-python/cpython-3.11.17-macos-aarch64-none/bin/python3.11` | Resolved 17 packages, exit 0; the ignored `.venv` interpreter link remains stale. |
+| `UV_CACHE_DIR=/private/tmp/loansim-review-cache uv build --offline --python /private/tmp/loansim-review-python/cpython-3.11.17-macos-aarch64-none/bin/python3.11 --out-dir /private/tmp/loansim-phase2-repair-dist` | Wheel and source archive built, exit 0. |
+
+Offscreen form and result screenshots were inspected; the result now shows the new schedule columns and a horizontal scroll bar for the 13-column table. The source-requirements and approved-hook SHA-256 values remained `513377bf04f68e4447868944fe1a6b14856e677138c379511d9595340af9f89e` and `7546a316ff33977b78fde6765954f0f685d64ce123c69c67e6556d4fc18340d7`. `configure-cc/` was clean and `git diff --check` exited 0. Full checks will be refreshed after the documentation update. No Phase 2 commit or hosted three-system CI result exists, and no Git staging, commit, or push was performed.
+
+Final verification after the documentation update: the full offscreen pytest command with `HYPOTHESIS_STORAGE_DIRECTORY=/private/tmp/loansim-phase2-fixes-final-hypothesis` exited 0 with **119 passed in 4.73 s**. Ruff lint exited 0; Ruff format reported 38 files already formatted, exit 0; mypy found no issues in 34 source files, exit 0. `uv build --offline` to `/private/tmp/loansim-phase2-repair-final-dist` built the wheel and source archive, exit 0. The workflow test file separately reported 5 passed in 2.84 s. A static presentation-key audit printed `PRESENTATION_KEYS_OK 182`, exit 0, and a wheel inventory check printed `WHEEL_CONTENT_OK 28`, exit 0. The only remaining phase gate is hosted CI for the exact delivered commit; this local worktree is not a delivered commit.
+
+## 2026-11-01 — Phase 2 follow-up audit corrections
+
+The owner requested all necessary corrections after a fresh independent audit. Existing local Phase 2 work remained unstaged on `eec316a`. Three new workflow tests reproduced the audit defects before implementation: an unchanged old result lost its saved engine version on resave; an earlier asynchronous open displaced the latest requested scenario; and invalid saved form state raised `KeyError` after partially replacing the current form. The focused red run reported `3 failed, 5 deselected`, exit 1, with the expected assertions and traceback. Each regression passed separately after the relevant fix. The form, workflow, repository, and startup group then reported `33 passed`, exit 0. An intermediate Ruff format check failed for two new line wraps, and intermediate mypy found three test-helper type errors; both were corrected and rechecked without weakening either gate.
+
+The window now preserves the engine version attached to a loaded snapshot until an explicit fresh calculation, gives the most recent accepted open request precedence, and reports a restoration failure without replacing the active form or deleting the saved record. The form restores its previous state if applying saved fields or provenance fails. The localization catalog includes the saved-state error. Documentation was updated to describe those behaviors.
+
+Observed local checks after the code and documentation changes:
+
+| Command | Result |
+| --- | --- |
+| `QT_QPA_PLATFORM=offscreen PYTHONDONTWRITEBYTECODE=1 PYTEST_ADDOPTS='-p no:cacheprovider' HYPOTHESIS_STORAGE_DIRECTORY=/private/tmp/loansim-phase2-followup-final-hypothesis /private/tmp/loansim-audit-venv-20261101/bin/pytest -q` | 122 passed in 6.19 s, exit 0. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/ruff check .codex/hooks src tests` | All checks passed, exit 0. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/ruff format --check .codex/hooks src tests` | 38 files already formatted, exit 0. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/mypy .codex/hooks src/loansim tests` | No issues in 34 source files, exit 0. |
+| `UV_CACHE_DIR=/private/tmp/loansim-review-cache uv lock --check --offline --python /private/tmp/loansim-review-python/cpython-3.11.17-macos-aarch64-none/bin/python3.11` | Resolved 17 packages, exit 0; the ignored local `.venv` interpreter link remains stale. |
+| `UV_CACHE_DIR=/private/tmp/loansim-review-cache uv build --offline --python /private/tmp/loansim-review-python/cpython-3.11.17-macos-aarch64-none/bin/python3.11 --out-dir /private/tmp/loansim-phase2-followup-dist` | Wheel and source distribution built, exit 0. |
+| `git diff --check`; `git diff --exit-code -- docs/source-requirements.md src/loansim/core .codex/hooks/session_start.py`; `git -C configure-cc status --short` | Exit 0 and no changes in the preserved paths. |
+
+The source requirements, Phase 1 financial formulas, `configure-cc/`, and the separately approved hook were preserved. No Git staging, commit, or push was performed. Native-window inspection and hosted Ubuntu, macOS, and Windows CI for the exact delivered Phase 2 commit remain unverified; final closure is not claimed.
+
+## 2026-11-01 — Phase 2 follow-up review corrections
+
+A separate read-only code reviewer found four additional user-visible cases in the first follow-up patch: failed restoration lost the prior validation error; a restored entered field could remain read-only; editing only a scenario's name, color, or notes required a fresh calculation and changed old-engine provenance; and a late failure from an obsolete open request marked the newer scenario with the old error. A further regression exposed that a space-padded color passed form validation but raised from the chart. New or strengthened workflow tests first failed on each behavior. The fixes preserve field validation and editability, keep old result and derived provenance during metadata-only edits while updating original-input metadata, suppress stale open failures, and require the exact `#RRGGBB` color format. The expanded workflow file passed 15 tests; no financial formula changed.
+
+Observed checks after code and documentation updates:
+
+| Command | Result |
+| --- | --- |
+| `QT_QPA_PLATFORM=offscreen PYTHONDONTWRITEBYTECODE=1 PYTEST_ADDOPTS='-p no:cacheprovider' HYPOTHESIS_STORAGE_DIRECTORY=/private/tmp/loansim-phase2-expanded-final2 /private/tmp/loansim-audit-venv-20261101/bin/pytest -q` | 129 passed in 9.44 s, exit 0. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/ruff check .codex/hooks src tests` | All checks passed, exit 0. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/ruff format --check .codex/hooks src tests` | 38 files already formatted, exit 0. |
+| `/private/tmp/loansim-audit-venv-20261101/bin/mypy .codex/hooks src/loansim tests` | No issues in 34 source files, exit 0. |
+| `UV_CACHE_DIR=/private/tmp/loansim-review-cache uv lock --check --offline --python /private/tmp/loansim-review-python/cpython-3.11.17-macos-aarch64-none/bin/python3.11` | Resolved 17 packages, exit 0; ignored `.venv` interpreter link still stale. |
+| `UV_CACHE_DIR=/private/tmp/loansim-review-cache uv build --offline --python /private/tmp/loansim-review-python/cpython-3.11.17-macos-aarch64-none/bin/python3.11 --out-dir /private/tmp/loansim-phase2-expanded-dist` | Wheel and source distribution built, exit 0. |
+| `git diff --check`; preservation diff for source/core/hook; `git -C configure-cc status --short` | Exit 0, with preserved files unchanged. |
+
+The `docs/source-requirements.md` SHA-256 remained `513377bf04f68e4447868944fe1a6b14856e677138c379511d9595340af9f89e`, and the approved hook SHA-256 remained `7546a316ff33977b78fde6765954f0f685d64ce123c69c67e6556d4fc18340d7`. All changes remain local and unstaged. Hosted CI for the exact delivered Phase 2 commit and native-window inspection remain unverified; final phase closure is not claimed.
+
+Final installation check in a fresh external Python 3.11.17 environment: `UV_CACHE_DIR=/private/tmp/loansim-review-cache UV_PROJECT_ENVIRONMENT=/private/tmp/loansim-phase2-final-venv uv sync --locked --dev --offline --python /private/tmp/loansim-review-python/cpython-3.11.17-macos-aarch64-none/bin/python3.11` installed 16 packages, exit 0. In that environment the package, GUI, and data imports printed `PHASE2_IMPORT_OK`, exit 0; the full offscreen `uv run --locked --offline pytest -q` reported **129 passed in 11.16 s**, exit 0; Ruff lint and format passed, mypy found no issues in 34 source files, and `uv build --offline` produced wheel and source archives at `/private/tmp/loansim-phase2-delivery-check-dist`, all exit 0. Fresh Git status showed no staged files. This verifies the local worktree, not a hosted three-system run.
